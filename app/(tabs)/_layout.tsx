@@ -1,6 +1,7 @@
 import { SymbolView } from 'expo-symbols';
 import { Tabs } from 'expo-router';
 
+import { BrandHeader } from '@/components/Logo';
 import { theme } from '@/constants/theme';
 
 export default function TabLayout() {
@@ -21,6 +22,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Para ver',
+          header: () => <BrandHeader />,
           tabBarIcon: ({ color }) => (
             <SymbolView
               name={{ ios: 'film', android: 'movie', web: 'movie' }}

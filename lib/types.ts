@@ -1,9 +1,12 @@
 export type MediaType = 'movie' | 'tv';
 
+export type CatalogPeriod = 'week' | 'month' | 'year';
+
 export type CatalogItem = {
   id: number;
   mediaType: MediaType;
   title: string;
+  englishTitle: string;
   overview: string;
   posterPath: string | null;
   year: string;
@@ -16,6 +19,7 @@ export type StreamingOffer = {
   providerId: number;
   providerName: string;
   logoPath: string | null;
+  access: 'Suscripción' | 'Alquiler' | 'Compra';
 };
 
 export type TitleDetail = CatalogItem & {
@@ -30,6 +34,7 @@ export type WatchedTitle = {
   mediaType: MediaType;
   tmdbId: number;
   title: string;
+  englishTitle: string;
   posterPath: string | null;
   year: string;
   rating: number;

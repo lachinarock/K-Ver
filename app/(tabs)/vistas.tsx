@@ -42,6 +42,7 @@ export default function WatchedScreen() {
             )}
             <View style={styles.body}>
               <Text style={styles.title}>{item.title}</Text>
+              {item.englishTitle ? <Text style={styles.englishTitle}>{item.englishTitle}</Text> : null}
               <Text style={styles.meta}>
                 {item.mediaType === 'movie' ? 'Película' : 'Serie'}
                 {item.year ? ` · ${item.year}` : ''}
@@ -72,5 +73,6 @@ const styles = StyleSheet.create({
   posterEmpty: { borderWidth: 1, borderColor: theme.line },
   body: { flex: 1, justifyContent: 'center', gap: 6 },
   title: { color: theme.text, fontSize: 16, fontWeight: '700' },
+  englishTitle: { color: theme.muted, fontSize: 12 },
   meta: { color: theme.muted, fontSize: 13 },
 });

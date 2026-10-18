@@ -59,6 +59,7 @@ export default function TitleScreen() {
         mediaType: title.mediaType,
         tmdbId: title.id,
         title: title.title,
+        englishTitle: title.englishTitle,
         posterPath: title.posterPath,
         year: title.year,
         rating,
@@ -97,6 +98,7 @@ export default function TitleScreen() {
         />
       ) : null}
       <Text style={styles.heading}>{title.title}</Text>
+      {title.englishTitle ? <Text style={styles.englishTitle}>{title.englishTitle}</Text> : null}
       <Text style={styles.meta}>
         {[title.year, title.runtimeLabel, title.genres.slice(0, 3).join(' · ')].filter(Boolean).join('  ·  ')}
       </Text>
@@ -121,15 +123,17 @@ export default function TitleScreen() {
 
       <Text style={styles.section}>En México</Text>
       {knownPlatforms.length === 0 ? (
-        <Text style={styles.body}>Hoy no aparece en las plataformas de suscripción que sigue K-Ver.</Text>
+        <Text style={styles.body}>Hoy no aparece en las plataformas que sigue K-Ver.</Text>
       ) : (
         <View style={styles.offers}>
           {knownPlatforms.map((offer) => {
             const platform = platformById(offer.providerId);
             return (
-              <View key={offer.providerId} style={styles.offer}>
+              <View key={`${offer.providerId}:${offer.access}`} style={styles.offer}>
                 <View style={[styles.dot, { backgroundColor: platform?.color ?? theme.gold }]} />
-                <Text style={styles.offerText}>{offer.providerName}</Text>
+                <Text style={styles.offerText}>
+                  {offer.providerName} · {offer.access}
+                </Text>
               </View>
             );
           })}
@@ -173,6 +177,7 @@ const styles = StyleSheet.create({
   center: { flex: 1, backgroundColor: theme.bg, alignItems: 'center', justifyContent: 'center', padding: 24 },
   hero: { width: '100%', height: 210, borderRadius: 16, backgroundColor: theme.card },
   heading: { color: theme.text, fontSize: 28, fontWeight: '800', marginTop: 8 },
+  englishTitle: { color: theme.muted, fontSize: 14 },
   meta: { color: theme.muted, fontSize: 14 },
   scores: { flexDirection: 'row', gap: 12, marginTop: 8 },
   score: { flex: 1, backgroundColor: theme.card, borderRadius: 14, padding: 12, gap: 2 },
